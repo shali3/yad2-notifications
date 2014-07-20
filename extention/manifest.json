@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+
+    "name": "yad2 Notifications",
+    "description": "תוספת המאפשרת קבלת התראות במחשב על מודעות חדשות בחיפושים שונים ב-yad2. בנוסף ניתן להיעזר בתוסף על מנת להסיר הודעות לא מעניינות מתוצאות החיפוש",
+    "version": "1.0",
+
+    "permissions": [
+        "*://*.yad2.co.il/*",
+        "activeTab",
+        "tabs",
+        "notifications"
+    ],
+    "icons": {
+        "48": "icon_48.png",
+        "128": "icon_128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*.yad2.co.il/*"
+            ],
+            "js": [
+                "jquery-2.1.1.min.js",
+                "contentscript.js"
+            ]
+        }
+    ],
+    "browser_action": {
+        "default_icon": "icon_48.png",
+        "default_popup": "popup.html"
+    }
+}
