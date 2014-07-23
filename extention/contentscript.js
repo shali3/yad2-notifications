@@ -71,7 +71,9 @@ function init() {
     var $ads = $(ADS_SELECTOR);
     $ads.click(onAdClick);
 
+    var hasAds = false;
     $ads.each(function (i, ad) {
+        hasAds = true;
         var $ad = $(ad);
         var id = getAdId($ad);
         if (!getProperty(id, PROP_FIRST_SEEN)) {
@@ -79,7 +81,9 @@ function init() {
         }
     });
 
-    invalidateColors()
+    if (hasAds) {
+        invalidateColors();
+    }
 }
 
 chrome.runtime.onMessage.addListener(
