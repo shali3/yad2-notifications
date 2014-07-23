@@ -1,0 +1,8 @@
+
+.newItem {
+    background-color: blue !important;
+}
+
+.visitedItem {
+    background-color: red !important;
+}
