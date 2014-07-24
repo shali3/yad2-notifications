@@ -155,7 +155,10 @@
  * @externs
  *
  */
+
+//Stubs
 var chrome = {};
+var $ = function(){};
 
 /**
  * TODO(tbreisacher): Move all chrome.app.* externs into their own file.
