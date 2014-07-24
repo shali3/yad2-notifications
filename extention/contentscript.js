@@ -86,11 +86,11 @@ function init() {
     }
 }
 
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.msg == "clearFiltered") {
-            clearFiltered()
-        }
-    });
+//chrome.runtime.onMessage.addListener(
+//    function (request, sender, sendResponse) {
+//        if (request.msg == "clearFiltered") {
+//            clearFiltered()
+//        }
+//    });
 
 init();
