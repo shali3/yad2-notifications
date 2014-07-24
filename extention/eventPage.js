@@ -1,7 +1,7 @@
 /**
  * Created by shali on 21/07/14.
  */
-var data = {notificationUrls: []};
+var syncData = {notificationUrls: []};
 var notificationIdToUrl = {};
 const UPDATE_INTERVAL_MINUTES = 1;
 const ALARM_NAME = "fetchAds";
@@ -15,7 +15,7 @@ const STOP_FOLLOWING_INDEX = 1;
 
 function invalidateTab(tab) {
     if (isYad2Tab(tab)) {
-        var notification = data.notificationUrls.indexOf(tab.url) != -1;
+        var notification = syncData.notificationUrls.indexOf(tab.url) != -1;
         chrome.browserAction.setBadgeText({tabId: tab.id, text: notification ? 'ON' : ''});
     }
 }
@@ -24,10 +24,10 @@ function isYad2Tab(tab) {
 }
 function onBrowserActionClicked(tab) {
     if (isYad2Tab(tab)) {
-        toggleArrayItem(data.notificationUrls, tab.url);
+        toggleArrayItem(syncData.notificationUrls, tab.url);
         invalidateAlarm();
         invalidateTab(tab);
-        chrome.storage.sync.set(data);
+        chrome.storage.sync.set(syncData);
     }
 }
 
@@ -65,9 +65,9 @@ function fetchAds(notificationUrl) {
 }
 function onAlarmTick(alarm) {
     if (alarm.name == ALARM_NAME) {
-        if (data.notificationUrls.length > 0) {
+        if (syncData.notificationUrls.length > 0) {
 
-            var notifications = data.notificationUrls;
+            var notifications = syncData.notificationUrls;
             for (var i = 0; i < notifications.length; i++) {
                 fetchAds(notifications[i]);
             }
@@ -77,11 +77,10 @@ function onAlarmTick(alarm) {
         }
 
     }
-
 }
 
 function invalidateAlarm() {
-    if (data.notificationUrls.length > 0) {
+    if (syncData.notificationUrls.length > 0) {
         chrome.alarms.create(ALARM_NAME, {periodInMinutes: UPDATE_INTERVAL_MINUTES});
         onAlarmTick({name: ALARM_NAME});
     }
@@ -105,10 +104,10 @@ function onNotificationClicked(notificationId, buttonIndex) {
         });
     }
     else if (buttonIndex == STOP_FOLLOWING_INDEX) {
-        if (removeFromArray(data.notificationUrls, url)) {
+        if (removeFromArray(syncData.notificationUrls, url)) {
             invalidateAlarm();
             invalidateTabs({url: url});
-            chrome.storage.sync.set(data);
+            chrome.storage.sync.set(syncData);
         }
     }
     chrome.notifications.clear(notificationId, function () {
@@ -138,7 +137,7 @@ function init() {
 
 chrome.storage.sync.get(null, function (items) {
     if (items.notificationUrls) {
-        data = items;
+        syncData = items;
     }
     init();
 });
