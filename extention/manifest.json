@@ -10,7 +10,8 @@
         "activeTab",
         "tabs",
         "notifications",
-        "storage"
+        "storage",
+        "alarms"
     ],
     "icons": {
         "48": "icon_48.png",
