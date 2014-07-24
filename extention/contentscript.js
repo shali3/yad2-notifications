@@ -4,8 +4,6 @@
 const PROP_VISITED = "visited";
 const PROP_FIRST_SEEN = "firstSeen";
 const NEW_AD_SEC = 60;
-const ADS_SELECTOR = "tr[id^='tr_Ad']";
-const INNER_INTEGRATION_SELECTOR = "td:nth-child(2)";
 
 
 function getAdId($item) {

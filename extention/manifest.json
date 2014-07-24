@@ -25,13 +25,16 @@
             "css": ["mystyles.css"],
             "js": [
                 "jquery-2.1.1.min.js",
+                "common.js",
                 "contentscript.js"
             ]
         }
     ],
     "background": {
         "scripts": [
+            "lodash.min.js",
             "jquery-2.1.1.min.js",
+            "common.js",
             "eventPage.js"],
         "persistent": false
     },
